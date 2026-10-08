@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Rick and Morty</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+    <header>
+        <h1>Rick and Morty</h1>
+        <nav>
+            <a href="index.html">Персонажи</a>
+            <a href="episodes.html">Эпизоды</a>
+        </nav>
+    </header>
+
+    
+    <section class="filters">
+        <select id="filter-status">
+            <option value="">Все статусы</option>
+            <option value="alive">Живой</option>
+            <option value="dead">Мёртвый</option>
+            <option value="unknown">Неизвестно</option>
+        </select>
+
+        <select id="filter-location">
+            <option value="">Все локации</option>
+        </select>
+    </section>
+
+    <main id="cards" class="cards">
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
