@@ -17,17 +17,20 @@
     </header>
 
     
-    <section class="filters">
-        <select id="filter-status">
-            <option value="">Все статусы</option>
-            <option value="alive">Живой</option>
-            <option value="dead">Мёртвый</option>
-            <option value="unknown">Неизвестно</option>
-        </select>
+        <section class="filters">
+        <input type="text" id="search" placeholder="Поиск по имени..." list="names-list">
+        <datalist id="names-list"></datalist>
+        
+        <input type="text" id="filter-status" placeholder="Статус..." list="status-list">
+        <datalist id="status-list">
+            <option value="Alive">
+            <option value="Dead">
+            <option value="unknown">
+        </datalist>
 
-        <select id="filter-location">
-            <option value="">Все локации</option>
-        </select>
+        <input type="text" id="filter-location" placeholder="Локация..." list="location-list">
+        <datalist id="location-list">
+        </datalist>
     </section>
 
     <main id="cards" class="cards">

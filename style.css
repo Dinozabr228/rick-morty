@@ -50,10 +50,10 @@ nav a:hover {
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     padding: 20px;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -227,4 +227,35 @@ nav a:hover {
 
 #episode #locations {
     margin-top: 15px;
+}
+
+.pagination {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 0;
+    flex-wrap: wrap;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.pagination button {
+    padding: 6px 10px;
+    border: 1px solid #222;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 32px;
+}
+
+.pagination button.active {
+    background: #222;
+    color: white;
+}
+
+.pagination span {
+    font-size: 14px;
 }

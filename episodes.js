@@ -1,5 +1,5 @@
 let allEpisodes = [];
-let visibleCount = 20;
+let visibleCount = 10;
 
 
 function renderEpisodes() {
@@ -38,7 +38,7 @@ function renderEpisodes() {
 
         button.addEventListener('click', () => {
 
-            visibleCount += 20;
+            visibleCount += 10;
 
             renderEpisodes();
         });

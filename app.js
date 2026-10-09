@@ -1,25 +1,22 @@
 let allCharacters = [];
-let visibleCount = 20;
+let currentPage = 1;
+const perPage = 10;
 
 
 function renderCards(characters) {
-
     const cards = document.getElementById('cards');
-
     cards.innerHTML = '';
 
-    const visibleCharacters = characters.slice(0, visibleCount);
+    const start = (currentPage - 1) * perPage;
+    const end = start + perPage;
+    const visible = characters.slice(start, end);
 
-    visibleCharacters.forEach(character => {
-
+    visible.forEach(character => {
         const card = document.createElement('div');
-
         card.className = 'card';
-
         card.addEventListener('click', () => {
             window.location.href = `character.html?id=${character.id}`;
         });
-
         card.innerHTML = `
             <img src="${character.image}" alt="${character.name}">
             <div class="card-info">
@@ -28,33 +25,52 @@ function renderCards(characters) {
                 <p>${character.location.name}</p>
             </div>
         `;
-
         cards.appendChild(card);
     });
 
+    const totalPages = Math.ceil(characters.length / perPage);
+const pagination = document.createElement('div');
+pagination.className = 'pagination';
 
-    if (visibleCount < characters.length) {
+function addBtn(i) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    if (i === currentPage) btn.className = 'active';
+    btn.addEventListener('click', () => {
+        currentPage = i;
+        renderCards(characters);
+        window.scrollTo(0, 0);
+    });
+    pagination.appendChild(btn);
+}
 
-       const button = document.createElement('button');
+function addDots() {
+    const span = document.createElement('span');
+    span.textContent = '...';
+    pagination.appendChild(span);
+}
 
-        button.className = 'load-more';
-        button.textContent = 'Загрузить ещё';
+addBtn(1);
 
-        button.addEventListener('click', () => {
+if (currentPage > 3) addDots();
 
-            visibleCount += 20;
+for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+    addBtn(i);
+}
 
-            renderCards(characters);
-        });
+if (currentPage < totalPages - 2) addDots();
 
-        cards.appendChild(button);
-    }
+if (totalPages > 1) addBtn(totalPages);
+
+cards.appendChild(pagination);
 }
 
 
 function fillLocations(characters) {
+    const locationList = document.getElementById('location-list');
 
-    const locationSelect = document.getElementById('filter-location');
+    console.log('locationList: ', locationList);
+    if(!locationList ) return;
 
     const locations = new Set();
 
@@ -63,45 +79,39 @@ function fillLocations(characters) {
     });
 
     locations.forEach(location => {
-
         const option = document.createElement('option');
-
         option.value = location;
-        option.textContent = location;
-
-        locationSelect.appendChild(option);
+        locationList.appendChild(option);
     });
 }
 
 
 function loadCharacters() {
-
     const status = document.getElementById('filter-status').value;
     const location = document.getElementById('filter-location').value;
+    const search = document.getElementById('search').value.toLowerCase();
 
     let filteredCharacters = allCharacters;
 
-
     if (status) {
-
-    filteredCharacters = filteredCharacters.filter(character =>
-        character.status.toLowerCase() === status.toLowerCase()
-    );
-
+        filteredCharacters = filteredCharacters.filter(character =>
+            character.status.toLowerCase().includes(status.toLowerCase())
+        );
     }
-
 
     if (location) {
-
         filteredCharacters = filteredCharacters.filter(character =>
-            character.location.name === location
+            character.location.name.includes(location.toLowerCase)
         );
-
     }
 
+    if (search) {
+        filteredCharacters = filteredCharacters.filter(character =>
+            character.name.toLowerCase().includes(search)
+        );
+    }
 
-    visibleCount = 20;
-
+    currentPage = 1;
     renderCards(filteredCharacters);
 }
 
@@ -134,9 +144,18 @@ function loadAllCharacters() {
             });
 
             fillLocations(allCharacters);
-
+                    
             renderCards(allCharacters);
+
+            const namesList = document.getElementById('names-list');
+                allCharacters.forEach(character => {
+                const option = document.createElement('option');
+                option.value = character.name;
+                namesList.appendChild(option);
+                });
+
         });
+
 }
 
 
@@ -144,14 +163,19 @@ const statusFilter = document.getElementById('filter-status');
 const locationFilter = document.getElementById('filter-location');
 
 
-statusFilter.addEventListener('change', () => {
+statusFilter.addEventListener('input', () => {
     loadCharacters();
 });
 
 
-locationFilter.addEventListener('change', () => {
+locationFilter.addEventListener('input', () => {
     loadCharacters();
 });
 
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', ()=>{
+    loadCharacters()
+});
 
 loadAllCharacters();
+

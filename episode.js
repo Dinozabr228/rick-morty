@@ -37,8 +37,6 @@ fetch(`https://rickandmortyapi.com/api/episode/${id}`)
                 document.getElementById('locations');
 
 
-            /* Персонажи */
-
             characters.forEach(character => {
 
                 const card = document.createElement('div');
@@ -64,7 +62,6 @@ fetch(`https://rickandmortyapi.com/api/episode/${id}`)
             });
 
 
-            /* Локации */
 
             const locations = new Set();
 
