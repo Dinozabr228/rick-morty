@@ -69,7 +69,6 @@ cards.appendChild(pagination);
 function fillLocations(characters) {
     const locationList = document.getElementById('location-list');
 
-    console.log('locationList: ', locationList);
     if(!locationList ) return;
 
     const locations = new Set();
@@ -101,7 +100,7 @@ function loadCharacters() {
 
     if (location) {
         filteredCharacters = filteredCharacters.filter(character =>
-            character.location.name.includes(location.toLowerCase)
+            character.location.name.toLowerCase().includes(location.toLowerCase())
         );
     }
 

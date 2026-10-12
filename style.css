@@ -111,8 +111,6 @@ nav a:hover {
     transform: translateY(-2px);
 }
 
-
-
 #character {
     max-width: 800px;
     margin: 30px auto;
@@ -128,8 +126,6 @@ nav a:hover {
     margin: 0 auto 20px;
     border-radius: 10px;
 }
-
-
 
 #episodes {
     max-width: 1000px;
@@ -153,15 +149,11 @@ nav a:hover {
     transform: translateY(-3px);
 }
 
-
-
 #episode {
     max-width: 1200px;
     margin: 30px auto;
     padding: 20px;
 }
-
-
 
 #locations {
     background: white;
@@ -229,6 +221,32 @@ nav a:hover {
     margin-top: 15px;
 }
 
+.episode-card {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 4px solid #ccc;
+}
+
+.episode-card a {
+    text-decoration: none;
+    color: #222;
+    display: block;
+}
+
+.episode-card p {
+    margin: 3px 0;
+    font-size: 15px;
+}
+
+.season-1 { border-left-color: #7ec8c8; background: #f0fafa; }
+.season-2 { border-left-color: #8ec98a; background: #f0faf0; }
+.season-3 { border-left-color: #c8a87e; background: #faf6f0; }
+.season-4 { border-left-color: #a87ec8; background: #f8f0fa; }
+.season-5 { border-left-color: #c87e8e; background: #faf0f2; }
+
+
+
 .pagination {
     grid-column: 1 / -1;
     display: flex;
@@ -259,3 +277,4 @@ nav a:hover {
 .pagination span {
     font-size: 14px;
 }
+
